@@ -1,0 +1,70 @@
+body{
+  background-color:"white";
+}
+h1 {
+  font-size: 60px;
+  background: -webkit-linear-gradient(#7c57be, rgb(72, 241, 129));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.baslik{
+  background:"white";
+  text-align: center;
+  position: relative;
+  top:-34px;
+}
+.algorithm{
+  position: relative;
+  top:-70px;
+}
+
+ul {
+  list-style-type: none;
+  margin:0;
+  padding: 0;
+  overflow: hidden;
+  background-color:"white";
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding:15px 50px;
+  text-decoration: none;
+  margin-left: 3px;
+}
+
+li a:hover:not(.active) {
+  background-color:#f9c9a5;
+}
+
+.active {
+  background-color: #f39c12;
+}
+
+.bilgi{
+  background-color: #ff6c90;
+  text-align: center;
+  font-size: 50px;
+  text-decoration: none;
+  
+  position: relative;
+  top: 475px;
+}
+
+canvas{
+  vertical-align: center;
+  margin-left:480px;
+  background: #03001e;
+  
+}
+
+button{
+  background-color: #ff6c90;
+  margin:10px;
+}
