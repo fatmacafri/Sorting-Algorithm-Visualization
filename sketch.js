@@ -1,9 +1,11 @@
 let w = 15;
 let values = []; //genişliği 15 olan değerler
 //let states = []; //her çubuğun durumunu saklamak ve renk değiştirmek için
+let controller = true;
 
 function setup() {
-    createCanvas(600, 300); // Create Canvas of Size Windows // Width * Windows Height
+    if(controller){
+        createCanvas(600, 300); // Create Canvas of Size Windows // Width * Windows Height
     values = new Array(floor(width / w)); // Sütunları oluşturmak için
     for (let i = 0; i < values.length; i++) {
         values[i] = Math.floor(float(random(height))); //Array içine random değerler eklemek
@@ -11,22 +13,28 @@ function setup() {
         window.print(values);
     }
     print("Unsorted Array:" + values); // To print values to Browser's Console
+    }
+    
 }
 
 const BubbleSort = async () => {
-    for (var i = 0; i < values.length - 1; i++) {
-        for (var j = 0; j < values.length - i - 1; j++) {
-            if (values[j] >= values[j + 1]) {
+    if(controller){
+        controller = false;
+        for (var i = 0; i < values.length - 1; i++) {
+            for (var j = 0; j < values.length - i - 1; j++) {
+                if (values[j] >= values[j + 1]) {
                // states[j] = 1;
 
                 // Call to swap function
                 await swap(values, j, j + 1);
                 //states[j + 1] = 0;
-            }
+                }
             //states[j] = 2;
+            }
         }
+        controller = true;
+        return values;
     }
-    return values;
 };
 
 const QuickSort = async () => {
@@ -35,7 +43,9 @@ const QuickSort = async () => {
 };
 
 const InsertionSort = async () => {
-    let length = values.length;
+    if(controller){
+        controller = false;
+        let length = values.length;
     for (let i = 1; i < length; i++) {
         let key = values[i];
         let j = i - 1;
@@ -46,10 +56,15 @@ const InsertionSort = async () => {
         }
         values[j + 1] = key;
     }
+    controller = true;
+    }
+    
 };
 
 const SelectionSort = async () => {
-    // Clone original array to prevent its modification.
+    if(controller){
+        controller = false;
+        // Clone original array to prevent its modification.
     for (let i = 0; i < values.length - 1; i += 1) {
         let minIndex = i;
         // Find minimum element in the rest of array.
@@ -65,56 +80,70 @@ const SelectionSort = async () => {
         await sleep(100);
         print("Sorted Array:" + values);
     }
+    controller = true;
+    }
+    
 };
 
 const CountingSort = async () => {
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    let i;
-    let z = 0;
-    const count = [];
+    if(controller){
+        controller = false;
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        let i;
+        let z = 0;
+        const count = [];
 
-    for (i = min; i <= max; i++) {
-        count[i] = 0;
-    }
-
-    for (i = 0; i < values.length; i++) {
-        count[values[i]]++;
-    }
-
-    for (i = min; i <= max; i++) {
-        while (count[i]-- > 0) {
-            values[z++] = i;
-            await sleep(50);
+        for (i = min; i <= max; i++) {
+            count[i] = 0;
         }
+
+            for (i = 0; i < values.length; i++) {
+            count[values[i]]++;
+            }
+
+                for (i = min; i <= max; i++) {
+                    while (count[i]-- > 0) {
+                    values[z++] = i;
+                    await sleep(50);
+                    }
+                }
     }
+    controller = true;  
 };
 
 const MergeSort = () => {
-    const mergeSort = (values, half = values.length / 2) => {
+    if(controller){
+        controller = false;
+        const mergeSort = (values, half = values.length / 2) => {
         if (values.length < 2) {
             return values;
         }
         const left = values.splice(0, half); //left part of array
         return merger(mergeSort(left), mergeSort(values));
-    };
+        };
 
-    const merger = (left, right) => {
-        const values = [];
-        while (left.length && right.length) {
-            if (left[0] < right[0]) {
-                values.push(left.shift());
-            } else {
-                values.push(right.shift());
-            }
-        }
+        const merger = (left, right) => {
+            const values = [];
+                while (left.length && right.length) {
+                    if (left[0] < right[0]) {
+                    values.push(left.shift());
+                    }           
+                    else {
+                    values.push(right.shift());
+                    }
+                }
 
-        return [...values, ...left, ...right];
-    };
+            return [...values, ...left, ...right];
+        };
     values = mergeSort(values);
+    }
+    controller = true; 
 };
 const ShellSort = async () => {
-    var increment = values.length / 2;
+    if(controller){
+        controller = false;
+        var increment = values.length / 2;
     while (increment > 0) {
         for (i = increment; i < values.length; i++) {
             var j = i;
@@ -134,6 +163,8 @@ const ShellSort = async () => {
             increment = parseInt((increment * 5) / 11);
         }
     }
+    }
+    controller = true;
 };
 
 
@@ -180,7 +211,7 @@ async function partition(arr, start, end) {
 
     return pivotIndex;
 }
-function draw() {
+draw = () => {
     background("white");
 
     for (let i = 0; i < values.length; i++) {
@@ -198,13 +229,13 @@ function draw() {
     }
 }
 
-async function swap(arr, a, b) {
-    await sleep(50); //call to sleep function
+ const swap = async (arr, a, b) => {
+    await sleep(50);
     let t = arr[a];
     arr[a] = arr[b];
     arr[b] = t;
 }
 
-function sleep(ms) {
+const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
