@@ -1,5 +1,6 @@
 body {
     background-color: "white";
+   
 }
 
 .baslik {
@@ -9,7 +10,7 @@ body {
     -webkit-text-fill-color: transparent;
     text-align: center;
     position: relative;
-    top: -34px;
+    top: -5px;
 }
 .algorithm {
     position: relative;
@@ -17,24 +18,27 @@ body {
 }
 
 ul {
+    width:100vw;
     list-style-type: none;
-    margin: 0;
+    
     padding-left: 85px;
-    padding-top: 18px;
+    padding-right: 85px;
+    padding-top: 60px;
     overflow: hidden;
 }
 
 li {
     float: left;
+    margin-left: 14px;
 }
 
 li a {
     display: block;
     color: black;
     text-align: center;
-    padding: 10px 30px;
+    padding: 10px 20px;
     text-decoration: none;
-    margin-left: 8px;
+    margin-left: 5px;
 }
 
 li :hover {
@@ -46,11 +50,8 @@ li :hover {
 .bilgi {
     background-color:green;
     text-align: center;
-    font-size: 50px;
-    text-decoration: none;
-
     position: relative;
-    top: 500px;
+    top: 450px;
 }
 
 canvas {

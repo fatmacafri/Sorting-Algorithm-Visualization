@@ -108,8 +108,9 @@ const CountingSort = async () => {
                     await sleep(50);
                     }
                 }
+         controller = true;        
     }
-    controller = true;  
+     
 };
 
 const MergeSort = () => {
