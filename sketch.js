@@ -13,22 +13,20 @@ function setup() {
             window.print(values);
         }
         print("Unsorted Array:" + values); // To print values to Browser's Console
-    }
-    else {
-        alert("Please wait for the sorting to be completed!")
+    } else {
+        alert("Please wait for the sorting to be completed!");
     }
 }
 
 draw = () => {
     background("white");
-
     for (let i = 0; i < values.length; i++) {
         stroke(0);
         fill("lightblue");
         rect(i * w, height - values[i], w, values[i]);
-
     }
-}
+};
+
 const BubbleSort = async () => {
     if (controller) {
         controller = false;
@@ -46,21 +44,24 @@ const BubbleSort = async () => {
         }
         controller = true;
         return values;
-    }
-    else {
-        alert("Please wait for the sorting to be completed!")
+    } else {
+        alert("Please wait for the sorting to be completed!");
     }
 };
 
 const QuickSort = async () => {
-    quickSort(values, 0, values.length);
+    if (controller) {
+        quickSort(values, 0, values.length);
+    } else {
+        alert("Please wait for the sorting to be completed!");
+    }
+
     print("Sorted Array:" + values);
-}
+};
 
 //Asynchronous Definition of Quick Sort Function
 async function quickSort(arr, start, end) {
-
-
+    controller = false;
     if (start >= end) {
         return;
     }
@@ -74,10 +75,8 @@ async function quickSort(arr, start, end) {
         quickSort(arr, index + 1, end),
     ]);
 
-
     // Asynchronous Definition of Partition Function
     async function partition(arr, start, end) {
-
         for (let i = start; i < end; i++) {
             //states[i] = 1;
         }
@@ -102,8 +101,8 @@ async function quickSort(arr, start, end) {
         }
 
         return pivotIndex;
-
     }
+    controller = true;
 }
 
 const InsertionSort = async () => {
@@ -121,9 +120,8 @@ const InsertionSort = async () => {
             values[j + 1] = key;
         }
         controller = true;
-    }
-    else {
-        alert("Please wait for the sorting to be completed!")
+    } else {
+        alert("Please wait for the sorting to be completed!");
     }
 };
 
@@ -147,12 +145,9 @@ const SelectionSort = async () => {
             print("Sorted Array:" + values);
         }
         controller = true;
-
+    } else {
+        alert("Please wait for the sorting to be completed!");
     }
-    else {
-        alert("Please wait for the sorting to be completed!")
-    }
-
 };
 
 const CountingSort = async () => {
@@ -179,44 +174,52 @@ const CountingSort = async () => {
             }
         }
         controller = true;
-    }
-    else {
-        alert("Please wait for the sorting to be completed!")
+    } else {
+        alert("Please wait for the sorting to be completed!");
     }
 };
 
-const MergeSort = () => {
-    if (controller) {
-        controller = false;
-        const mergeSort = (values, half = values.length / 2) => {
-            if (values.length < 2) {
-                return values;
-            }
-            const left = values.splice(0, half); //left part of array
-            return merger(mergeSort(left), mergeSort(values));
-        };
+function MergeSort() {
+    copy = values.slice();
+    mergeSortSlice(copy, 0, copy.length);
+    return;
+}
+async function mergeSortSlice(a, start, end) {
+    if (end - start <= 1) return;
 
-        const merger = (left, right) => {
-            const values = [];
-            while (left.length && right.length) {
-                if (left[0] < right[0]) {
-                    values.push(left.shift());
-                }
-                else {
-                    values.push(right.shift());
-                }
-            }
+    var mid = Math.round((end + start) / 2);
 
-            return [...values, ...left, ...right];
-        };
-        values = mergeSort(values);
-        controller = true;
+    // wait till divides are sort
+    await mergeSortSlice(a, start, mid);
+    await mergeSortSlice(a, mid, end);
+
+    // merge divides
+    let i = start,
+        j = mid;
+    while (i < end && j < end) {
+        if (a[i] > a[j]) {
+            let t = a[j];
+            a.splice(j, 1);
+            a.splice(i, 0, t);
+            j++;
+        }
+        i++;
+        if (i == j) j++;
+
+        // copy back the current state of the sorting
+        values = a.slice();
+
+        // slow down
+        await sleep(50);
     }
-    else {
-        alert("Please wait for the sorting to be completed!")
-    }
 
-};
+    // restart
+    if (start == 0 && end == a.length) {
+        await sleep(50);
+        startSort = true;
+    }
+}
+
 const ShellSort = async () => {
     if (controller) {
         controller = false;
@@ -241,23 +244,18 @@ const ShellSort = async () => {
             }
         }
         controller = true;
-    }
-    else {
-        alert("Please wait for the sorting to be completed!")
+    } else {
+        alert("Please wait for the sorting to be completed!");
     }
 };
-
-
-
-
 
 const swap = async (arr, a, b) => {
     await sleep(100);
     let t = arr[a];
     arr[a] = arr[b];
     arr[b] = t;
-}
+};
 
 const sleep = (ms) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
-}
+};
