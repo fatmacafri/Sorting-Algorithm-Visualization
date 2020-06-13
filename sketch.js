@@ -180,11 +180,22 @@ const CountingSort = async () => {
 };
 
 function MergeSort() {
+    if(controller){
+        controller = false;
     copy = values.slice();
     mergeSortSlice(copy, 0, copy.length);
+    
     return;
+
+    }
+    else{
+        alert("Please wait for the sorting to be completed!");
+    }
+    controller = true;
+    
 }
 async function mergeSortSlice(a, start, end) {
+    controller = false;
     if (end - start <= 1) return;
 
     var mid = Math.round((end + start) / 2);
@@ -218,6 +229,7 @@ async function mergeSortSlice(a, start, end) {
         await sleep(50);
         startSort = true;
     }
+    
 }
 
 const ShellSort = async () => {
