@@ -6,6 +6,7 @@ let controller = true;
 
 function setup() {
     if (controller) {
+        controller =false;
         createCanvas(600, 300); 
         values = new Array(floor(width / w)); 
         for (let i = 0; i < values.length; i++) {
@@ -14,7 +15,7 @@ function setup() {
             print(values);
         }
         print("Unsorted Array:" + values); // To print values to Browser's Console
-        
+        controller = true;
     } else {
         showAlert("danger","Please wait for the sorting to be completed!");
     }
