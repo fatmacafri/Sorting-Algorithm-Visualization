@@ -1,20 +1,22 @@
+const buttons = document.getElementsByClassName("buttons");
 let w = 15;
-let values = []; //genişliği 15 olan değerler
-//let states = []; //her çubuğun durumunu saklamak ve renk değiştirmek için
+let values = []; 
+let states = []; //her çubuğun durumunu saklamak ve renk değiştirmek için
 let controller = true;
 
 function setup() {
     if (controller) {
-        createCanvas(600, 300); // Create Canvas of Size Windows // Width * Windows Height
-        values = new Array(floor(width / w)); // Sütunları oluşturmak için
+        createCanvas(600, 300); 
+        values = new Array(floor(width / w)); 
         for (let i = 0; i < values.length; i++) {
-            values[i] = Math.floor(float(random(height))); //Array içine random değerler eklemek
-            //  states[i] = -1;
-            window.print(values);
+            values[i] = Math.floor(float(random(height))); 
+             states[i] = -1;
+            print(values);
         }
         print("Unsorted Array:" + values); // To print values to Browser's Console
+        
     } else {
-        alert("Please wait for the sorting to be completed!");
+        showAlert("danger","Please wait for the sorting to be completed!");
     }
 }
 
@@ -25,7 +27,22 @@ draw = () => {
         fill("lightblue");
         rect(i * w, height - values[i], w, values[i]);
     }
-};
+   
+} 
+
+const showAlert = (type,message) => {
+   console.log(buttons[0]);
+    const alert = document.createElement("div");
+    alert.className = `alert alert-${type}`; 
+    alert.textContent = message;
+    buttons[0].appendChild(alert);
+
+    
+    setTimeout(function(){
+        alert.remove();
+    },2000);
+}
+
 
 const BubbleSort = async () => {
     if (controller) {
@@ -33,76 +50,73 @@ const BubbleSort = async () => {
         for (var i = 0; i < values.length - 1; i++) {
             for (var j = 0; j < values.length - i - 1; j++) {
                 if (values[j] >= values[j + 1]) {
-                    // states[j] = 1;
-
-                    // Call to swap function
                     await swap(values, j, j + 1);
-                    //states[j + 1] = 0;
                 }
-                //states[j] = 2;
             }
-        }
+        } 
+        print("Bubble Sorted Array:" + values);
+        showAlert("success","Well done! Sorting completed.");
         controller = true;
         return values;
-    } else {
-        alert("Please wait for the sorting to be completed!");
-    }
+    
+} else {
+    showAlert("danger","Please wait for the sorting to be completed!");
+}
 };
+
 
 const QuickSort = async () => {
     if (controller) {
         quickSort(values, 0, values.length);
     } else {
-        alert("Please wait for the sorting to be completed!");
+        showAlert("danger","Please wait for the sorting to be completed!");
     }
-
-    print("Sorted Array:" + values);
 };
 
-//Asynchronous Definition of Quick Sort Function
+
 async function quickSort(arr, start, end) {
     controller = false;
     if (start >= end) {
         return;
     }
     let index = await partition(arr, start, end);
-    //states[index] = -1;
+    states[index] = -1;
 
-    // Promise.all is used so that each function
-    // should invoke simultaneously
     await Promise.all([
         quickSort(arr, start, index - 1),
         quickSort(arr, index + 1, end),
     ]);
 
-    // Asynchronous Definition of Partition Function
+    
     async function partition(arr, start, end) {
         for (let i = start; i < end; i++) {
-            //states[i] = 1;
+            states[i] = 1;
         }
 
         let pivotIndex = start;
         let pivotValue = arr[end];
-        //states[pivotIndex] = 0;
+        states[pivotIndex] = 0;
 
         for (let i = start; i < end; i++) {
             if (arr[i] < pivotValue) {
                 await swap(arr, i, pivotIndex);
-                //states[pivotIndex] = -1;
+                states[pivotIndex] = -1;
                 pivotIndex++;
-                //states[pivotIndex] = 0;
+                states[pivotIndex] = 0;
             }
         }
 
         await swap(arr, pivotIndex, end);
 
         for (let i = start; i < end; i++) {
-            //states[i] = -1;
+            states[i] = -1;
         }
 
         return pivotIndex;
+
     }
     controller = true;
+
 }
 
 const InsertionSort = async () => {
@@ -119,9 +133,12 @@ const InsertionSort = async () => {
             }
             values[j + 1] = key;
         }
+        print("Insertion Sorted Array:" + values);
+        showAlert("success","Well done! Sorting completed.");
         controller = true;
-    } else {
-        alert("Please wait for the sorting to be completed!");
+    } 
+    else {
+        showAlert("danger","Please wait for the sorting to be completed!");
     }
 };
 
@@ -142,11 +159,13 @@ const SelectionSort = async () => {
                 await swap(values, minIndex, i);
             }
             await sleep(100);
-            print("Sorted Array:" + values);
+            print("Selection Sorted Array:" + values);    
         }
+        showAlert("success","Well done! Sorting completed.");
         controller = true;
-    } else {
-        alert("Please wait for the sorting to be completed!");
+    } 
+    else {
+        showAlert("danger","Please wait for the sorting to be completed!");
     }
 };
 
@@ -171,32 +190,35 @@ const CountingSort = async () => {
             while (count[i]-- > 0) {
                 values[z++] = i;
                 await sleep(100);
+
             }
         }
+        print("Counting Sorted Array:" + values);
+        showAlert("success","Well done! Sorting completed.");
         controller = true;
-    } else {
-        alert("Please wait for the sorting to be completed!");
+    } 
+    else {
+        showAlert("danger","Please wait for the sorting to be completed!");
     }
 };
 
 function MergeSort() {
-    if(controller){
+    if (controller) {
         controller = false;
-    copy = values.slice();
-    mergeSortSlice(copy, 0, copy.length);
-    
-    return;
-
+        copy = values.slice();
+        mergeSortSlice(copy, 0, copy.length);
+        return;
     }
-    else{
-        alert("Please wait for the sorting to be completed!");
+    else {
+        showAlert("danger","Please wait for the sorting to be completed!");
     }
     controller = true;
-    
 }
+
 async function mergeSortSlice(a, start, end) {
     controller = false;
-    if (end - start <= 1) return;
+    if (end - start <= 1) 
+    return;
 
     var mid = Math.round((end + start) / 2);
 
@@ -216,20 +238,18 @@ async function mergeSortSlice(a, start, end) {
         }
         i++;
         if (i == j) j++;
-
         // copy back the current state of the sorting
         values = a.slice();
-
         // slow down
         await sleep(50);
     }
-
     // restart
     if (start == 0 && end == a.length) {
         await sleep(50);
         startSort = true;
+        print("Merge Sorted Array:" + values);
+        showAlert("success","Well done! Sorting completed.");
     }
-    
 }
 
 const ShellSort = async () => {
@@ -254,10 +274,12 @@ const ShellSort = async () => {
             } else {
                 increment = parseInt((increment * 5) / 11);
             }
-        }
+        } 
+        print("Shell Sorted Array:" + values);
+        showAlert("success","Well done! Sorting completed.");
         controller = true;
     } else {
-        alert("Please wait for the sorting to be completed!");
+        showAlert("danger","Please wait for the sorting to be completed!");
     }
 };
 

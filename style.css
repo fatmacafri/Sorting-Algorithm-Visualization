@@ -1,66 +1,32 @@
 body {
     background-color: "white";
-   
 }
 
-.baslik {
-    font-size: 25px;
-    background: -webkit-linear-gradient(#7c57be, rgb(72, 241, 129));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-align: center;
-    position: relative;
-    top: -5px;
-}
-.algorithm {
-    position: relative;
-    top: -70px;
-}
-
-ul {
-    width:100vw;
-    list-style-type: none;
+.buttons {
+    position: relative;    
+    padding-top: 70px;   
+    margin-top: 40px;
+    margin-left: 200px;
     
-    padding-left: 85px;
-    padding-right: 85px;
-    padding-top: 60px;
-    overflow: hidden;
+}
+.grafik {
+    margin-top: 50px;
+    
 }
 
-li {
-    float: left;
-    margin-left: 14px;
+canvas {  
+    margin-top: 100px;
+    margin-left: 450px; 
 }
-
-li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 10px 20px;
-    text-decoration: none;
-    margin-left: 5px;
+.alert-danger {
+    width: 25%;
+    margin-top: 20px;
 }
+.alert-success {
+    width: 25%;
+    margin-top: 20px;
 
-li :hover {
-    background-color: lightgreen;
-}
+    }
+    
 
 
-
-.bilgi {
-    background-color:green;
-    text-align: center;
-    position: relative;
-    top: 450px;
-}
-
-canvas {
-    vertical-align: center;
-    background: #03001e;
-    margin-left:480px;
-}
-
-button {
-    background-color: green;
-    margin: 5px;
-}

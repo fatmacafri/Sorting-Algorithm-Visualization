@@ -1,83 +1,216 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"
-            type="text/javascript"
-        ></script>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <script src="sketch.js"></script>
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6/css/font-awesome.min.css"
-        />
-        <title>Sorting Algorithm Visualization</title>
-    </head>
 
-    <body>
-        <div class="sayfa">
-            <div class="baslik">
-                <h1>Sorting Algorithm Visualization</h1>
-            </div>
-            <div class="algorithm">
-                <ul>
-                    <li>
-                        <button onclick="setup()" type="button">
-                            <a href="#RandomizeArray">Randomize Array</a>
-                        </button>
-                    </li>
-                    <li>
-                        <button onclick="SelectionSort()" type="button">
-                            <a href="#SelectionSort">Selection Sort</a>
-                        </button>
-                    </li>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Sorting Algorithm Visualization</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
 
-                    <li>
-                        <button onclick="BubbleSort()" type="button">
-                            <a href="#BubbleSort">Bubble Sort</a>
-                        </button>
-                    </li>
-                    <li>
-                        <button onclick="QuickSort()" type="button">
-                            <a href="#QuickSort">Quick Sort</a>
-                        </button>
-                    </li>
-                    <li>
-                        <button onclick="InsertionSort()" type="button">
-                            <a href="#InsertionSort">Insertion Sort</a>
-                        </button>
-                    </li>
-                    <li>
-                        <button onclick="MergeSort()" type="button">
-                            <a href="#MergeSort">Merge Sort</a>
-                        </button>
-                    </li>
-                    <li>
-                        <button onclick="CountingSort()" type="button">
-                            <a href="#CountingSort">Counting Sort</a>
-                        </button>
-                    </li>
-                    <li>
-                        <button onclick="ShellSort()" type="button">
-                            <a href="#ShellSort">Shell Sort</a>
-                        </button>
-                    </li>
-                </ul>
-            </div>
-            <div class="grafik"></div>
-            <div class="kontrol"></div>
-            <div class="bilgi">
-                <a href="https://www.linkedin.com/in/fatma-cafri-40b789173/"
-                    ><img src="in.jpg" width="30" height="30"
-                /></a>
-                <a href="https://medium.com/@fatmacafri.1"
-                    ><img src="medium.png" width="30" height="30"
-                /></a>
-                <a href="https://github.com/fatmacafri"
-                    ><img src="github-logo.jpg" width="30" height="30"
-                /></a>
+<body>
+    <div class="container">
+        <nav class="navbar fixed-top navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">
+                <h1>SORTING ALGORITHM VISUALIZATION</h1>
+            </span>
+            <form class="form-inline">
+                <button class="btn btn-success my-2 my-sm-0 rounded-pill" type="button">LOGIN</button>
+            </form>
+        </nav>
+    </div>
+
+
+    <div class="buttons">
+        <div class="row">
+            <div class="col-sm">
+
+                <button onclick="setup()" type="button" class="btn btn-outline-success btn-md">Randomize Array
+                </button>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary btn-md dropdown-toggle dropdown-toggle-split"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Selection Sort
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <button onclick="SelectionSort()" class="dropdown-item ">
+                            START SORTING :)</button>
+                        <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">
+                            Class: Sorting algorithm <br>
+                            Data structure: Array<br>
+                            Worst-case performance: О(n^2) comparisons, О(n) swaps<br>
+                            Best-case performance: О(n^2) comparisons, О(n) swaps<br>
+                            Average performance: О(n^2) comparisons, О(n) swaps<br>
+                            Worst-case space complexity: O(1) auxiliary</a>
+                    </div>
+                </div>
+
+
+                <div class="btn-group">
+                    <button  type="button"
+                        class="btn btn-outline-warning btn-md dropdown-toggle dropdown-toggle-split"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Insertion
+                        Sort</button>
+                    <span class="sr-only">Toggle Dropdown</span>
+                    <div class="dropdown-menu">
+                        <button onclick="InsertionSort()" class="dropdown-item ">
+                            START SORTING :)</button>
+                        <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">
+                            Class: Sorting algorithm <br>
+                            Data structure: Array<br>
+                            Worst-case performance: О(n^2) comparisons and swaps<br>
+                            Best-case performance: O(n) comparisons, O(1) swaps<br>
+                            Average performance: О(n^2) comparisons and swaps<br>
+                            Worst-case space complexity: О(n) total, O(1) auxiliary</a>
+                    </div>
+                </div>
+
+
+                <div class="btn-group">
+                    <button type="button"
+                        class="btn btn-outline-secondary btn-md dropdown-toggle dropdown-toggle-split"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bubble
+                        Sort
+                    </button>
+                    <span class="sr-only">Toggle Dropdown</span>
+                    <div class="dropdown-menu">
+                        <button onclick="BubbleSort()" class="dropdown-item ">
+                            START SORTING :)</button>
+                        <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">
+                            Class: Sorting algorithm <br>
+                            Data structure: Array <br>
+                            Worst-case performance: O(n^2) comparisons, O(n^2) swaps<br>
+                            Best-case performance: O(n) comparisons, O(1) swaps<br>
+                            Average performance: O(n^2) comparisons, O(n^2) swaps<br>
+                            Worst-case space complexity: O(n) total, O(1) auxiliary</a>
+                    </div>
+                </div>
+
+
+                
+
+                <div class="btn-group">
+                    <button type="button"
+                        class="btn btn-outline-info btn-md dropdown-toggle dropdown-toggle-split "
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Merge Sort
+                    </button>
+                    <span class="sr-only">Toggle Dropdown</span>
+
+                    <div class="dropdown-menu">
+                        <button onclick="MergeSort()" class="dropdown-item ">
+                            START SORTING :)</button>
+                        <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">
+                            Class: Sorting algorithm <br>
+                            Data structure: Array<br>
+                            Worst-case performance: O(n log n)<br>
+                            Best-case performance: O(n log n) typical, O(n) natural variant<br>
+                            Average performance: O(n log n)<br>
+                            Worst-case space complexity: О(n) total with O(n) auxiliary, O(1) auxiliary with linked
+                            lists</a>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button"
+                        class="btn btn-outline-success btn-md dropdown-toggle dropdown-toggle-split "
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Counting
+                        Sort</button>
+                    <span class="sr-only">Toggle Dropdown</span>
+
+                    <div class="dropdown-menu">
+                        <button onclick="CountingSort()" class="dropdown-item ">
+                            START SORTING :)</button>
+                        <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">
+                            Class: Sorting Algorithm <br>
+                            Data structure: Array<br>
+                            Worst-case performance: O(n+k), where k is the range of the non-negative key values.<br>
+                            Worst-case space complexity: O(n+k)</a>
+                    </div>
+
+                </div>
+
+
+                <div class="btn-group">
+                    <button type="button"
+                        class="btn btn-outline-dark btn-md dropdown-toggle dropdown-toggle-split "
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shell Sort
+                    </button>
+                    <span class="sr-only">Toggle Dropdown</span>
+
+                    <div class="dropdown-menu">
+                        <button onclick="ShellSort()" class="dropdown-item ">
+                            START SORTING :)</button>
+                        <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">
+                            Class: Sorting algorithm <br>
+                            Data structure: Array<br>
+                            Worst-case performance: O(n^2) (worst known worst case gap sequence)
+                            O(n log2n) (best known worst case gap sequence)<br>
+                            Best-case performance: O(n log n) (most gap sequences)
+                            O(n log2n) (best known worst-case gap sequence)<br>
+                            Average performance: depends on gap sequence<br>
+                            Worst-case space complexity: О(n) total, O(1) auxiliary
+                        </a>
+                    </div>
+
+                </div>
+
+<div class="btn-group">
+                    <button type="button"
+                        class="btn btn-outline-danger btn-md dropdown-toggle dropdown-toggle-split"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Quick
+                        Sort</button>
+                    <span class="sr-only">Toggle Dropdown</span>
+
+                    <div class="dropdown-menu">
+                        <button onclick="QuickSort()" class="dropdown-item ">
+                            START SORTING :)</button>
+                        <a class="dropdown-item disabled" href="#" tabindex="-1" aria-disabled="true">
+                            Class: Sorting algorithm <br>
+                            Worst-case performance: O(n^2)<br>
+                            Best-case performance: O(n log n) (simple partition)
+                            or O(n) (three-way partition and equal keys)<br>
+                            Average performance: O(n log n)<br>
+                            Worst-case space complexity: O(n) auxiliary (naive)
+                            O(log n) auxiliary (Sedgewick 1978)</a>
+                    </div>
+                </div>
+
+
+
+
+
             </div>
         </div>
-    </body>
+
+
+        <div class="bilgi">
+            <!-- Just an image -->
+            <nav class="navbar justify-content-end fixed-bottom navbar-light bg-light">
+                <span class="navbar-brand mb-0 h1">CONTACT </span>
+                <a href="https://medium.com/@fatmacafri.1"><img src="medium.png" width="40" height="40" loading="lazy"
+                        class="rounded-circle"></a>
+                <a href="https://www.linkedin.com/in/fatma-cafri-40b789173/"><img src="in.jpg" width="40" height="40"
+                        loading="lazy" class="rounded-circle"></a>
+                <a href="https://github.com/fatmacafri"><img src="github-logo.jpg" width="40" height="40" loading="lazy"
+                        class="rounded-circle"></a>
+            </nav>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+        <script src="sketch.js"></script>
+</body>
+
 </html>
