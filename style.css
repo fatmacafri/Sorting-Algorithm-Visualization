@@ -31,5 +31,22 @@ canvas {
 
 ul{
     padding-left: 0px;
+    display: block;
+    list-style-type: none;
+}
+li{
+    display: inline;
+    margin: 10px;
+    margin-bottom: -2px;
+    position: relative;
     
+}
+h1{
+    font-size: 25px;
+    background: -webkit-linear-gradient(#7c57be, rgb(72, 241, 129));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    position: relative;
+    padding-left: 500px;
 }
